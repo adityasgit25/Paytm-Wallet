@@ -8,6 +8,8 @@ So basically this is the root file of the backend on top of which all routes are
 // ----------------
 const express = require("express");
 
+
+
 // cors is basically used to connect backend and frontend, as we are using different urls for both
 const cors = require("cors");
 const rootRouter = require("./routes/index");

@@ -1,7 +1,10 @@
+
+
 // database file should be in the backend folder.
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoose.connect("mongodb+srv://adityamah2002:database2512@cluster0.y4dtc2q.mongodb.net/paytm")
+mongoose.connect(process.env.DATABASE_URL);
 
 
 // Creating the Schema
