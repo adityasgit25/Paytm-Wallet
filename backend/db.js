@@ -4,11 +4,13 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// this is just we are connecting to the database.
 mongoose.connect(process.env.DATABASE_URL);
 
 
 // Creating the Schema
 const userSchema = new mongoose.Schema({
+    // remember we could have directly used username: String, but we are using the object to add more properties.(that's the superpower of mongoose)
     username: {
         type: String,
         required: true,
@@ -48,6 +50,7 @@ const accountSchema = new mongoose.Schema({
     }
 });
 
+// this we are creating a model, .model() takes two arguments, first is the name of the model and second is the schema.
 const Account = mongoose.model('Account', accountSchema);
 // User in the brackets is the name of the mongoDB collections
 const User = mongoose.model('User', userSchema);
@@ -56,3 +59,7 @@ module.exports = {
     User,
     Account
 };
+
+// directly we can export the model also like:
+// export const Account = mongoose.model('Account', accountSchema);
+// export const User = mongoose.model('User', userSchema);
