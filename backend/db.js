@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String, 
-        required: true,
+        required: [true, "password is required"],
         minLength: 3
     },
     firstName: {
@@ -36,10 +36,14 @@ const userSchema = new mongoose.Schema({
         trim: true,
         maxLength: 50
     }
-});
+}, {timestamps: true});
+// timestamps are passed as the second argument, which will automatically add the createdAt and updatedAt fields in the database.
 
 const accountSchema = new mongoose.Schema({
     userId: {
+
+        // for referencing we basically use these two properties.
+        // type and ref
         type: mongoose.Schema.Types.ObjectId, // Reference to User Model
         ref: 'User',
         required: true
