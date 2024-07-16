@@ -140,6 +140,14 @@ router.get("/bulk", async (req, res) => {
         }))
     })
 })
+// FOR GETTING CURRENT USER INFO
+
+router.get("/getUser", authMiddleware, async (req, res) => {
+    const user = await User.findOne({
+      _id: req.userId,
+    });
+    res.json(user);
+  });
 
 
 

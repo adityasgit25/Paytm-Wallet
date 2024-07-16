@@ -17,6 +17,8 @@ router.get("/balance", authMiddleware, async (req, res) => {
     })
 });
 router.post("/transfer", authMiddleware, async (req, res) => {
+    console.log(req.userId);
+    console.log(req.amount);
     const {amount, to} = req.body;
     const account = await Account.findOne({
         userId: req.userId
