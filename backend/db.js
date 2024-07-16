@@ -5,8 +5,20 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // this is just we are connecting to the database.
-mongoose.connect(process.env.DATABASE_URL);
+// mongoose.connect(process.env.DATABASE_URL);
 
+
+const connectDB = async () => {
+    try {
+        const connectionInstance = await mongoose.connect(`${process.env.DATABASE_URL}`)
+        console.log(`\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`);
+    } catch (error) {
+        console.log("MONGODB connection FAILED ", error);
+        process.exit(1)
+    }
+}
+
+connectDB();
 
 // Creating the Schema
 const userSchema = new mongoose.Schema({
