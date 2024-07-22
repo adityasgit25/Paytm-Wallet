@@ -1,6 +1,6 @@
 // backend/routes/user.js
 const express = require('express');
-
+const bcrypt = require('bcrypt');
 const router = express.Router();
 const zod = require('zod');
 const {User, Account} =  require( '../db') ;
@@ -69,29 +69,28 @@ const signinBody = zod.object({
 })
 
 router.post("/signin", async (req, res) => {
-    const {success} = signinBody.safeParse(req.body);
+    console.log(req.body.username);
+    console.log(req.body.password);
+
+    const {success, data, error} = signinBody.safeParse(req.body);
+
     if (!success) {
-        return res.status(411).json({
-            message: "Incorrect inputs"
-        })
+        return res.status(400).json({
+          message: "Incorrect inputs",
+          details: error.errors
+        });
     }
+    
+    const { username, password } = data;
 
-    const user = await User.findOne({
-        username: req.body.username,
-        password: req.body.password
-    });
+    const user = await User.findOne({ username });
 
-    if (user) {
-        const token = jwt.sign({userId: user._id}, JWT_SECRET);
-        res.json({
-            token: token 
-        })
-        return; 
-    }
-
-    res.status(411).json({
-        message: "Error while logging in"
-    })
+   if (user && await bcrypt.compare(password, user.password)) {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    return res.json({ token });
+  }
+  
+  res.status(400).json({ message: "Invalid username or password" });
 })
 
 
