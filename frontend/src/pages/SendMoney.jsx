@@ -9,7 +9,7 @@ export const SendMoney = () => {
   const name = searchParams.get("name");
   const [amount, setAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
