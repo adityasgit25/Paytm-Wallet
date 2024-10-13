@@ -42,9 +42,9 @@ app.listen(PORT, () => {
 
 // production script
 // Serve static files from the frontend's dist directory
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.use(express.static(path.join(__dirname, "./frontend/dist")));
 
 // For any other route, serve index.html from the dist directory
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
+    res.sendFile(path.resolve(__dirname, "./frontend/dist", "index.html"));
 });
