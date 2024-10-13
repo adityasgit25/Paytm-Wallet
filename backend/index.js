@@ -13,6 +13,7 @@ const express = require("express");
 // You can also do
 // import express from "express"
 
+const path = require("path");
 
 // cors is basically used to connect backend and frontend, as we are using different urls for both
 const cors = require("cors");
@@ -34,3 +35,10 @@ app.use("/api/v1", rootRouter);
 
 // sab kaam hi ports pr hota ha.
 app.listen(3000);
+
+
+// production script
+app.use(express.static("./frontend/build"));
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+});

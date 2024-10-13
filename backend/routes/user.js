@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const {JWT_SECRET} = require('../config');
 const  { authMiddleware } = require("../middleware");
 
+
 const signupBody = zod.object({
     username: zod.string().email(),
     firstName: zod.string(),
@@ -85,9 +86,13 @@ router.post("/signin", async (req, res) => {
 
     const user = await User.findOne({ username });
 
+    if (!user) {
+      return res.status(404).json("User not found!");
+    }
+
    if (user && await bcrypt.compare(password, user.password)) {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-    return res.json({ token });
+    return res.status(200).json({ token: token });
   }
   
   res.status(400).json({ message: "Invalid username or password" });
