@@ -17,7 +17,7 @@ const path = require("path");
 
 // cors is basically used to connect backend and frontend, as we are using different urls for both
 const cors = require("cors");
-const rootRouter = require("./backend/routes/index");
+const rootRouter = require("./routes/index");
 
 // this "app" thing is like having Math. , basically you can use many things in that.
 const app = express();
@@ -42,9 +42,9 @@ app.listen(PORT, () => {
 
 // production script
 // Serve static files from the frontend's dist directory
-app.use(express.static(path.join(__dirname, "./frontend/dist")));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 // For any other route, serve index.html from the dist directory
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./frontend/dist", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
 });
