@@ -17,7 +17,7 @@ const path = require("path");
 
 // cors is basically used to connect backend and frontend, as we are using different urls for both
 const cors = require("cors");
-const rootRouter = require("./routes/index");
+const rootRouter = require("./backend/routes/index");
 
 // this "app" thing is like having Math. , basically you can use many things in that.
 const app = express();
