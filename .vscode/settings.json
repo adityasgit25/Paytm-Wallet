@@ -1,4 +1,6 @@
 {
     "pieces.cloudCapabilities": "Blended",
-    "pieces.telemetry": true
+    "pieces.telemetry": true,
+    "appService.defaultWebAppToDeploy": "/subscriptions/82d90d57-5c7a-45b2-b195-6560ea7216e3/resourceGroups/walletWeb/providers/Microsoft.Web/sites/walletWeb",
+    "appService.deploySubpath": "."
 }
